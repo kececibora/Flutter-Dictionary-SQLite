@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ingilizce_turkce_sozluk/DetaySayfa.dart';
 import 'package:ingilizce_turkce_sozluk/Kelimeler.dart';
+import 'package:ingilizce_turkce_sozluk/Kelimelerdao.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,19 +39,12 @@ class _AnasayfaState extends State<Anasayfa> {
   String aramaKelimesi = "";
 
   Future<List<Kelimeler>> tumKelimeleriGoster() async {
-    var kelimelerListesi = <Kelimeler>[];
+    var kelimelerListesi = await Kelimelerdao().tumKelimeler();
+    return kelimelerListesi;
+  }
 
-    var k1 = Kelimeler(1, "Dog", "Köpek");
-    var k2 = Kelimeler(2, "Fish", "Balık");
-    var k3 = Kelimeler(1, "Table", "Masa");
-
-    try {
-      kelimelerListesi.add(k1);
-      kelimelerListesi.add(k2);
-      kelimelerListesi.add(k3);
-    } catch (e) {
-      print(e);
-    }
+  Future<List<Kelimeler>> aramaYap(String aramaKelimesi) async {
+    var kelimelerListesi = await Kelimelerdao().kelimeAra(aramaKelimesi);
     return kelimelerListesi;
   }
 
@@ -92,7 +86,9 @@ class _AnasayfaState extends State<Anasayfa> {
           ],
         ),
         body: FutureBuilder<List<Kelimeler>>(
-          future: tumKelimeleriGoster(),
+          future: aramaYapiliyorMu
+              ? aramaYap(aramaKelimesi)
+              : tumKelimeleriGoster(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var kelimeler = snapshot.data;
