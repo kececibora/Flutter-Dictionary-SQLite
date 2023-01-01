@@ -1,6 +1,6 @@
-# ingilizce_turkce_sozluk
+# İngilizce - Türkçe Sözlük
 
-A new Flutter project.
+<img src="https://media0.giphy.com/media/0jvupIdo5Gzr3tIyjo/giphy.gif?cid=790b7611b5917a8529d590fe64b016b1f76370043a6f37f7&rid=giphy.gif&ct=g" alt="flutter">
 
 ## Getting Started
 
